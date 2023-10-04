@@ -1,3 +1,25 @@
+<?php
+    if (isset($_POST['email'])){
+        $conn = mysqli_connect('localhost', 'root', '', 'mnm2023');
+        if(!$conn){
+            die("Không thể kết nối ".mysqli_connect_error());
+        }
+
+        $pw = $_POST['password'];
+        $email = $_POST['email'];
+        $sql = "select * from users where email = '$email' and pw = '$pw'";
+
+        $row = mysqli_query($conn, $sql);
+        $count = mysqli_num_rows($row);
+        if($count == 1){
+            $tb = "Đăng nhập thành công";
+            header('Location: index.php');
+        }else{
+            $tb = "Sai email hoặc mật khẩu";
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +30,7 @@
     <title>Đăng nhập</title>
 </head>
 
-<body>
+<body>tb
     <div class="main">
 
         <form action="" method="POST" class="form" id="form-1">
@@ -41,7 +63,9 @@
                 <span class="form-message"></span>
             </div> -->
 
-            <button class="form-submit">Đăng nhập</button>
+            <!-- <button class="form-submit">Đăng nhập</button> -->
+
+            <input class="form-submit" type="submit" value="Đăng nhập" />
             <div class="spacer"></div>
 
             <div class="form-group">
@@ -55,7 +79,7 @@
 
     </div>
     <script src="./assets/js/register.js"></script>
-    <script>
+    <!-- <script>
         Validator({
             form: '#form-1',
             rules: [
@@ -64,17 +88,17 @@
                 Validator.isEmail('#email'),
                 Validator.isRequired('#password'),
                 Validator.minLength('#password'),
-                // Validator.isRequired('#password_confirmation'),
-                // Validator.isConfirm('#password_confirmation', function(){
-                //     return document.querySelector('#form-1 #password').value;
-                // })
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirm('#password_confirmation', function(){
+                    return document.querySelector('#form-1 #password').value;
+                })
             ],
 
             onSubmit: function(data){
                 console.log(data);
             }
         });
-    </script> 
+    </script>  -->
 </body>
 
 </html>

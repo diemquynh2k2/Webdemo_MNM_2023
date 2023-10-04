@@ -1,3 +1,20 @@
+<?php
+    if (isset($_POST['fullname'])){
+        $conn = mysqli_connect('localhost', 'root', '', 'mnm2023');
+        if(!$conn){
+            die("Không thể kết nối ".mysqli_connect_error());
+        }
+
+        $name = $_POST['fullname'];
+        $pw = $_POST['password'];
+        $email = $_POST['email'];
+        //$sql = "insert into users (fullName, pw, email) value ($name, $pw, $email)";
+
+        mysqli_query($conn, "insert into users (fullName, pw, email) value ('$name', '$pw', '$email')");
+        header('Location: login.php');
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,7 +28,7 @@
 <body>
     <div class="main">
 
-        <form action="" method="POST" class="form" id="form-1">
+        <form action="" method="post" class="form" id="form-1">
             <h3 class="heading">Đăng ký</h3>            
 
             <!-- <div class="spacer"></div> -->
@@ -41,12 +58,14 @@
                 <span class="form-message"></span>
             </div>
 
-            <button class="form-submit">Đăng ký</button>
+            <input class="form-submit" type="submit" value="Đăng ký" />
+
+            <!-- <button class="form-submit">Đăng ký</button> -->
         </form>
 
     </div>
     <script src="./assets/js/register.js"></script>
-    <script>
+    <!-- <script>
         Validator({
             form: '#form-1',
             rules: [
@@ -54,7 +73,7 @@
                 Validator.isRequired('#email'),
                 Validator.isEmail('#email'),
                 Validator.isRequired('#password'),
-                Validator.minLength('#password'),
+                //Validator.minLength('#password'),
                 Validator.isRequired('#password_confirmation'),
                 Validator.isConfirm('#password_confirmation', function(){
                     return document.querySelector('#form-1 #password').value;
@@ -65,7 +84,7 @@
                 console.log(data);
             }
         });
-    </script> 
+    </script>  -->
 </body>
 
 </html>
