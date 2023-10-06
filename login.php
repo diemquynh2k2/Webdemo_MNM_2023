@@ -7,7 +7,7 @@
 
         $pw = $_POST['password'];
         $email = $_POST['email'];
-        $sql = "select * from users where email = '$email' and pw = '$pw'";
+        $sql = "select * from users where email = '$email' and password = '$pw'";
 
         $row = mysqli_query($conn, $sql);
         $count = mysqli_num_rows($row);

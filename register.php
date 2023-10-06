@@ -10,7 +10,7 @@
         $email = $_POST['email'];
         //$sql = "insert into users (fullName, pw, email) value ($name, $pw, $email)";
 
-        mysqli_query($conn, "insert into users (fullName, pw, email) value ('$name', '$pw', '$email')");
+        mysqli_query($conn, "insert into users (fullName, password, email) value ('$name', '$pw', '$email')");
         header('Location: login.php');
     }
 ?>
