@@ -13,11 +13,26 @@
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/responsive.css">
     <link rel="stylesheet" href="./assets/fonts/fontawesome-free-5.15.3/css/all.min.css">
+    <link rel="stylesheet" type = "text/css" href ="./assets/css/logindone.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.4.2/gsap.min.js"></script>
 </head>
 
 <body>
+    <?php
+    session_start();
+
+    // Kiểm tra xem có thông báo đăng nhập không
+    if (isset($_SESSION['tb'])) {
+        echo '<div id="loginMessage" class="login-message">' . $_SESSION['tb'] . '</div>';
+        unset($_SESSION['tb']);  // Xóa thông báo sau khi hiển thị
+    }
+
+    // Lấy tên người dùng từ session (đã lưu ở login.php)
+    $email = isset($_SESSION['email']) ? $_SESSION['email'] : 'Khách';
+
+    ?>   
+   
     <div class="app">
         <header class="header">
             <div class="top-header">
@@ -65,7 +80,10 @@
                             </div>
                             <ul class="topheader__right__list v-center">
                                 <li class="topheader__right__item">
-                                    <i class="fa fa-user"></i> My Account
+                                    <i class="fa fa-user"></i> 
+                                        <?php 
+                                            echo $email;                                             
+                                        ?>
                                 </li>
                                 <li class="topheader__right__item">
                                     <i class="fa fa-heart"></i> Wishlist
@@ -2019,6 +2037,7 @@
     <script src="./assets/js/main.js"></script>
     <script src="./assets/js/backToTop.js"></script>
     <script src="./assets/js/menuMobile.js"></script>
+    <script src="./assets/js/3s.js"></script>
 </body>
 
 </html>
